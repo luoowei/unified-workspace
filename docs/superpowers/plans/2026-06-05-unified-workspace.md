@@ -20,33 +20,33 @@
 
 ### Task 2: Yjs Integration
 
-- [ ] Replace LWW sync with true Yjs CRDT conflict resolution
-- [ ] ProseMirror editor with Yjs binding
-- [ ] Y.Map / Y.Array / Y.Text for different content types
+- [x] Replace LWW sync with true Yjs CRDT conflict resolution
+- [x] ProseMirror editor with Yjs binding
+- [x] Y.Map / Y.Array / Y.Text for different content types
 
 ### Task 3: Data Layer
 
-- [ ] PGlite (Postgres-in-WASM) for structured data: tasks, calendar events
-- [ ] OPFS persistence for browser storage
-- [ ] SQL-based automation rules engine
+- [x] PGlite (Postgres-in-WASM) for structured data: tasks, calendar events
+- [x] OPFS persistence for browser storage
+- [x] SQL-based automation rules engine
 
 ### Task 4: UI Components
 
-- [ ] Rich text note editor (ProseMirror + Yjs)
-- [ ] Task management: Kanban board, list view, calendar view
-- [ ] Calendar with CalDAV integration
-- [ ] Automation rules builder ("when note tagged invoice, create due task")
+- [x] Rich text note editor (ProseMirror + Yjs)
+- [x] Task management: Kanban board, list view, calendar view
+- [x] Calendar with CalDAV integration
+- [x] Automation rules builder ("when note tagged invoice, create due task")
 
 ### Task 5: Sync Server
 
-- [ ] WebSocket relay for ordered, reliable message delivery
-- [ ] CalDAV server for calendar interoperability
-- [ ] Backup and export (JSON, Markdown, iCal)
+- [x] WebSocket relay for ordered, reliable message delivery
+- [x] CalDAV server for calendar interoperability
+- [x] Backup and export (JSON, Markdown, iCal)
 
 ### Task 6: Release Assets
 
-- [ ] README + README.zh-CN with quick-start
-- [ ] GitHub Actions CI
-- [ ] Docker Compose for self-hosted deployment (one command)
-- [ ] PWA manifest for mobile offline access
-- [ ] LAUNCH.md with channel plan
+- [x] README + README.zh-CN with quick-start
+- [x] GitHub Actions CI
+- [x] Docker Compose for self-hosted deployment (one command)
+- [x] PWA manifest for mobile offline access
+- [x] LAUNCH.md with channel plan

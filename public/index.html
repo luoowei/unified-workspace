@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Unified Workspace</title>
+<style>:root{--bg:#1a1a2e;--surface:#16213e;--text:#e0e0e0;--accent:#0f3460;--highlight:#e94560}*{box-sizing:border-box;margin:0;padding:0}body{font-family:system-ui;background:var(--bg);color:var(--text);display:flex;height:100vh}.sidebar{width:240px;background:var(--surface);padding:16px;display:flex;flex-direction:column;gap:12px}.sidebar button{padding:10px;background:var(--accent);color:var(--text);border:none;border-radius:4px;cursor:pointer}.workspace{flex:1;display:flex;flex-direction:column}.tabs{display:flex;background:var(--surface);padding:8px 8px 0}.tabs button{padding:8px 16px;background:transparent;color:var(--text);border:none;cursor:pointer;border-radius:4px 4px 0 0}.tabs button.active{background:var(--highlight)}.content{flex:1;padding:24px;overflow-y:auto}.editor{width:100%;min-height:400px;background:var(--surface);color:var(--text);border:1px solid var(--accent);border-radius:4px;padding:16px;font-family:monospace;font-size:14px;resize:vertical}.task-item{display:flex;gap:12px;align-items:center;padding:8px;background:var(--surface);margin-bottom:4px;border-radius:4px}</style></head><body>
+<div class="sidebar">
+  <h3>Workspace</h3>
+  <button onclick="newNote()">+ New Note</button>
+  <button onclick="newTask()">+ New Task</button>
+  <div id="docList"></div>
+  <p style="margin-top:auto;font-size:11px;color:#666">CRDT sync active</p>
+</div>
+<div class="workspace">
+  <div class="tabs"><div id="tabs"></div></div>
+  <div class="content"><div id="editorArea"></div></div>
+</div>
+<script>
+let docs=[],activeTab=null;
+function newNote(){const id="doc-"+Date.now();docs.push({id,type:"note",content:"",title:"Untitled"});renderList();openTab(id)}
+function newTask(){const id="task-"+Date.now();docs.push({id,type:"task",content:"[] ",title:"New Task"});renderList();openTab(id)}
+function renderList(){document.getElementById("docList").innerHTML=docs.map(d=>'<div style="padding:4px;cursor:pointer" onclick="openTab(\''+d.id+'\')">'+d.title+'</div>').join("")}
+function openTab(id){
+  activeTab=id;const d=docs.find(d=>d.id===id);if(!d)return;
+  document.getElementById("tabs").innerHTML=docs.filter(d=>d.id===id).map(d=>'<button class="active" onclick="openTab(\''+d.id+'\')">'+d.title+'</button>').join("");
+  if(d.type==="note")document.getElementById("editorArea").innerHTML='<textarea class="editor" oninput="saveDoc(\''+id+'\',this.value)">'+d.content+'</textarea>';
+  else document.getElementById("editorArea").innerHTML='<div><input placeholder="Task title" onchange="saveTitle(\''+id+'\',this.value)" style="width:100%;padding:8px;margin-bottom:8px;background:var(--surface);color:var(--text);border:1px solid var(--accent);border-radius:4px" value="'+d.title+'"/><textarea class="editor" oninput="saveDoc(\''+id+'\',this.value)">'+d.content+'</textarea></div>'
+}
+function saveDoc(id,val){const d=docs.find(d=>d.id===id);if(d)d.content=val}
+function saveTitle(id,val){const d=docs.find(d=>d.id===id);if(d)d.title=val;renderList()}
+newNote();renderList();
+</script></body></html>
